@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trigger-45 – GitHub Portfolio</title>
+
+<style>
+:root {
+  --primary: #8b5cf6;
+  --secondary: #3b82f6;
+  --text-main: #e0e7ff;
+  --text-soft: #c7d2fe;
+  --bg-card: rgba(20,20,40,.88);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+  padding: 20px;
+  color: var(--text-main);
+  background:
+    radial-gradient(ellipse at top left, rgba(124, 58, 237, 0.35), transparent 55%),
+    radial-gradient(ellipse at top right, rgba(37, 99, 235, 0.35), transparent 55%),
+    radial-gradient(ellipse at bottom left, rgba(167, 139, 250, 0.25), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(96, 165, 250, 0.25), transparent 60%),
+    linear-gradient(180deg, #050510 0%, #09091a 60%, #02020a 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+
+/* ===== Layout ===== */
+.layout {
+  max-width: 1400px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 30px;
+}
+
+@media (max-width: 1100px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Profile ===== */
+.profile-header {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding: 40px;
+  background: var(--bg-card);
+  border-radius: 18px;
+  box-shadow: 0 0 50px rgba(139,92,246,.45);
+  border: 1px solid rgba(139,92,246,.3);
+}
+
+.profile-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 5px solid var(--primary);
+  animation: pulse 4s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 25px rgba(139,92,246,.4); }
+  50% { box-shadow: 0 0 50px rgba(139,92,246,.9); }
+}
+
+.profile-info { flex: 1; min-width: 280px; }
+
+.profile-name { font-size: 2.5em; }
+.profile-username { color: var(--primary); margin: 8px 0 14px; }
+.profile-bio { color: var(--text-soft); line-height: 1.6; }
+
+.profile-stats {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.stat-number { font-size: 2em; color: var(--primary); }
+
+/* ===== Sections ===== */
+.section-title {
+  margin: 50px 0 20px;
+  font-size: 2em;
+  text-align: center;
+}
+
+/* ===== Repos ===== */
+.repos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(340px,1fr));
+  gap: 25px;
+}
+
+.repo-card {
+  background: var(--bg-card);
+  padding: 25px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform .3s, box-shadow .3s;
+  border: 1px solid rgba(139,92,246,.3);
+}
+
+.repo-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 40px rgba(139,92,246,.7);
+}
+
+.repo-name {
+  font-size: 1.3em;
+  color: var(--primary);
+}
+
+.repo-description {
+  margin: 10px 0;
+  color: var(--text-soft);
+}
+
+.repo-stats {
+  display: flex;
+  gap: 14px;
+  font-size: .9em;
+  align-items: center;
+}
+
+.language-badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+}
+
+/* ===== Skeleton ===== */
+.skeleton {
+  height: 180px;
+  border-radius: 14px;
+  background: linear-gradient(90deg,#222,#333,#222);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200px; }
+  100% { background-position: 200px; }
+}
+
+/* ===== Side Panel ===== */
+.side-panel {
+  position: sticky;
+  top: 20px;
+  background: var(--bg-card);
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0 0 40px rgba(139,92,246,.4);
+  border: 1px solid rgba(139,92,246,.3);
+}
+
+.side-section { margin-bottom: 25px; }
+
+.side-title {
+  color: var(--primary);
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+.follow-btn {
+  display: block;
+  text-align: center;
+  padding: 14px;
+  border-radius: 10px;
+  background: linear-gradient(135deg,var(--primary),var(--secondary));
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 0 30px rgba(139,92,246,.6);
+  transition: transform .2s;
+}
+
+.follow-btn:hover {
+  transform: translateY(-3px);
+}
+
+.tech-list span {
+  display: inline-block;
+  margin: 6px 6px 0 0;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.2);
+  font-size: .85em;
+}
+</style>
+</head>
+
+<body>
+<div class="layout">
+
+<main>
+  <div id="profile"></div>
+
+  <h2 class="section-title">⭐ Featured Projects</h2>
+  <div id="featured" class="repos-grid"></div>
+
+  <h2 class="section-title">Repositories</h2>
+  <div id="repos" class="repos-grid"></div>
+</main>
+
+<aside class="side-panel">
+  <div class="side-section">
+    <a class="follow-btn" href="https://github.com/Trigger-45" target="_blank">
+      ⭐ Follow on GitHub
+    </a>
+  </div>
+
+  <div class="side-section">
+    <div class="side-title">👤 Quick Facts</div>
+    <!-- <p>💻 Web & API Developer</p> -->
+    <p>🌍 Germany</p>
+    <p>🚀 Open for Projects</p>
+  </div>
+
+  <div class="side-section">
+    <div class="side-title">🛠 Tech Stack</div>
+    <div class="tech-list">
+      <!-- <span>JavaScript</span>
+      <span>HTML</span>
+      <span>CSS</span>
+      <span>Node.js</span>
+      <span>GitHub API</span> -->
+    </div>
+  </div>
+
+  <div class="side-section">
+    <div class="side-title">📡 Status</div>
+    <p style="color:#4ade80;">● Available for collaboration</p>
+  </div>
+</aside>
+
+</div>
+
+<script>
+const username = "Trigger-45";
+const featuredRepos = ["portfolio", "api", "website"];
+const cacheKey = "github_cache";
+const cacheTTL = 10 * 60 * 1000;
+
+function getCache() {
+  const c = localStorage.getItem(cacheKey);
+  if (!c) return null;
+  const parsed = JSON.parse(c);
+  if (Date.now() - parsed.time > cacheTTL) return null;
+  return parsed.data;
+}
+
+function setCache(data) {
+  localStorage.setItem(cacheKey, JSON.stringify({
+    time: Date.now(),
+    data
+  }));
+}
+
+async function fetchGitHub() {
+  const cached = getCache();
+  if (cached) return cached;
+
+  const [profile, repos] = await Promise.all([
+    fetch(`https://api.github.com/users/${username}`).then(r=>r.json()),
+    fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated`).then(r=>r.json())
+  ]);
+
+  const data = { profile, repos };
+  setCache(data);
+  return data;
+}
+
+function renderProfile(p) {
+  document.getElementById("profile").innerHTML = `
+  <div class="profile-header">
+    <img class="profile-avatar" src="${p.avatar_url}" alt="GitHub Avatar von ${p.login}">
+    <div class="profile-info">
+      <h1 class="profile-name">${p.name || p.login}</h1>
+      <div class="profile-username">@${p.login}</div>
+      <p class="profile-bio">${p.bio || ""}</p>
+      <div class="profile-stats">
+        <div><div class="stat-number">${p.public_repos}</div>Repos</div>
+        <div><div class="stat-number">${p.followers}</div>Follower</div>
+        <div><div class="stat-number">${p.following}</div>Following</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function repoCard(r) {
+  return `
+  <a href="${r.html_url}" target="_blank" class="repo-card">
+    <div class="repo-name">${r.name}</div>
+    <div class="repo-description">${r.description || "Keine Beschreibung vorhanden"}</div>
+    <div class="repo-stats">
+      ${r.language ? `<span class="language-badge">${r.language}</span>` : ""}
+      ⭐ ${r.stargazers_count}
+      🕒 ${new Date(r.updated_at).toLocaleDateString()}
+    </div>
+  </a>`;
+}
+
+function renderRepos(repos) {
+  document.getElementById("featured").innerHTML =
+    repos.filter(r => featuredRepos.includes(r.name))
+         .map(repoCard).join("");
+
+  document.getElementById("repos").innerHTML =
+    repos.filter(r => !featuredRepos.includes(r.name))
+         .map(repoCard).join("");
+}
+
+/* Skeleton Loader */
+document.getElementById("featured").innerHTML =
+document.getElementById("repos").innerHTML =
+Array(6).fill('<div class="skeleton"></div>').join("");
+
+fetchGitHub().then(data => {
+  renderProfile(data.profile);
+  renderRepos(data.repos);
+});
+</script>
+
+</body>
+</html>
