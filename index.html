@@ -204,9 +204,6 @@ body {
 <main>
   <div id="profile"></div>
 
-  <h2 class="section-title">⭐ Featured Projects</h2>
-  <div id="featured" class="repos-grid"></div>
-
   <h2 class="section-title">Repositories</h2>
   <div id="repos" class="repos-grid"></div>
 </main>
@@ -246,7 +243,6 @@ body {
 
 <script>
 const username = "Trigger-45";
-const featuredRepos = ["portfolio", "api", "website"];
 const cacheKey = "github_cache";
 const cacheTTL = 10 * 60 * 1000;
 
@@ -310,17 +306,10 @@ function repoCard(r) {
 }
 
 function renderRepos(repos) {
-  document.getElementById("featured").innerHTML =
-    repos.filter(r => featuredRepos.includes(r.name))
-         .map(repoCard).join("");
-
-  document.getElementById("repos").innerHTML =
-    repos.filter(r => !featuredRepos.includes(r.name))
-         .map(repoCard).join("");
+  document.getElementById("repos").innerHTML = repos.map(repoCard).join("");
 }
 
 /* Skeleton Loader */
-document.getElementById("featured").innerHTML =
 document.getElementById("repos").innerHTML =
 Array(6).fill('<div class="skeleton"></div>').join("");
 
