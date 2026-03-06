@@ -336,6 +336,35 @@ body {
   top: 120px;
 }
 
+/* Mobile: Horizontal scrolling menu */
+@media (max-width: 900px) {
+  .skills-sidebar {
+    position: static;
+    padding: 15px;
+    overflow-x: auto;
+    display: flex;
+    gap: 10px;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) rgba(139,92,246,.2);
+  }
+  
+  .skills-sidebar::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  .skills-sidebar::-webkit-scrollbar-track {
+    background: rgba(139,92,246,.2);
+    border-radius: 10px;
+  }
+  
+  .skills-sidebar::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+  }
+}
+
 .skill-nav-item {
   padding: 12px 16px;
   margin-bottom: 8px;
@@ -346,9 +375,26 @@ body {
   color: var(--text-soft);
 }
 
+@media (max-width: 900px) {
+  .skill-nav-item {
+    margin-bottom: 0;
+    border-left: none;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
+
 .skill-nav-item:hover {
   background: rgba(139,92,246,.1);
   border-left-color: var(--primary);
+}
+
+@media (max-width: 900px) {
+  .skill-nav-item:hover {
+    border-left-color: transparent;
+    border-bottom-color: var(--primary);
+  }
 }
 
 .skill-nav-item.active {
@@ -358,11 +404,24 @@ body {
   font-weight: 600;
 }
 
+@media (max-width: 900px) {
+  .skill-nav-item.active {
+    border-left-color: transparent;
+    border-bottom-color: var(--primary);
+  }
+}
+
 .skills-content {
   background: var(--bg-card);
   padding: 40px;
   border-radius: 14px;
   border: 1px solid rgba(139,92,246,.3);
+}
+
+@media (max-width: 600px) {
+  .skills-content {
+    padding: 25px;
+  }
 }
 
 .skill-detail-section {
@@ -380,6 +439,12 @@ body {
   display: flex;
   align-items: center;
   gap: 15px;
+}
+
+@media (max-width: 600px) {
+  .skill-detail-title {
+    font-size: 1.5em;
+  }
 }
 
 .skill-detail-grid {
@@ -549,50 +614,50 @@ html {
       <h2 class="about-title">👨‍💻 About Me</h2>
       <div class="about-content">
         <p>
-              I'm a <strong>dual study student</strong> from Germany, pursuing a degree in <strong>IT Security</strong>. 
-              My academic journey combines theoretical knowledge with practical experience, allowing me to work on 
-              real-world projects while deepening my understanding of cybersecurity, systems programming, and distributed systems.
-            </p>
-            <p>
-              On GitHub, you'll find a mix of <strong>university projects</strong> and <strong>personal initiatives</strong>. 
-              I believe in continuous learning and use my free time to explore new technologies, experiment with different 
-              programming paradigms, and contribute to open-source projects. Each project is an opportunity to grow as a developer 
-              and security professional.
-            </p>
+          I'm a <strong>dual study student</strong> from Germany, pursuing a degree in <strong>IT Security</strong>. 
+          My academic journey combines theoretical knowledge with practical experience, allowing me to work on 
+          real-world projects while deepening my understanding of cybersecurity, systems programming, and distributed systems.
+        </p>
+        <p>
+          On GitHub, you'll find a mix of <strong>university projects</strong> and <strong>personal initiatives</strong>. 
+          I believe in continuous learning and use my free time to explore new technologies, experiment with different 
+          programming paradigms, and contribute to open-source projects. Each project is an opportunity to grow as a developer 
+          and security professional.
+        </p>
       </div>
     </div>
   </section>
 
   <!-- Repositories Section -->
   <section id="repos" class="section">
-    <h2 class="section-title">Repositories</h2>
+    <h2 class="section-title">📚 Repositories</h2>
     <div id="reposContent" class="repos-grid"></div>
   </section>
 
   <!-- Skills Section -->
   <section id="skills" class="section">
-    <h2 class="section-title">Technical Skills/Experiences</h2>
+    <h2 class="section-title">🛠 Technical Skills/Experiences</h2>
     
     <div class="skills-page-container">
       <!-- Skills Navigation Sidebar -->
       <div class="skills-sidebar">
         <div class="skill-nav-item active" onclick="showSkillDetail('languages')">
-          Programming Languages
+          💻 Programming Languages
         </div>
         <div class="skill-nav-item" onclick="showSkillDetail('systems')">
-          Operating Systems
+          🖥️ Operating Systems
         </div>
         <div class="skill-nav-item" onclick="showSkillDetail('protocols')">
-          Communication Protocols
+          🔌 Communication Protocols
         </div>
         <div class="skill-nav-item" onclick="showSkillDetail('databases')">
-          Databases
+          🗄️ Databases
         </div>
         <div class="skill-nav-item" onclick="showSkillDetail('devtools')">
-          Development Tools
+          🚀 Development Tools
         </div>
         <div class="skill-nav-item" onclick="showSkillDetail('cloud')">
-          Cloud & Containers
+          ☁️ Cloud & Containers
         </div>
       </div>
 
@@ -605,7 +670,7 @@ html {
           <div class="skill-detail-grid">
             
             <div class="skill-detail-item">
-              <h3>C <span class="skill-level" span></h3>
+              <h3>C</h3>
               <p>Systems programming and low-level development. Extensive experience in developing efficient and high-performance applications.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">System Programming</span>
@@ -615,8 +680,7 @@ html {
             </div>
             
             <div class="skill-detail-item">
-              <!-- <h3>Python <span class="skill-level intermediate">Intermediate</span></h3> -->
-              <h3>Python <span class="skill-level" span></h3> 
+              <h3>Python</h3>
               <p>Scripting, automation, and backend development with Python. Experience in building tools and automation scripts.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">Python 3.x</span>
@@ -626,7 +690,7 @@ html {
             </div>
 
             <div class="skill-detail-item">
-              <h3>C++ <span class="skill-level" span></h3>
+              <h3>C++</h3>
               <p>Object-oriented and modern C++ development. Experience with templates, STL, and modern C++ standards.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">OOP</span>
@@ -637,7 +701,7 @@ html {
             </div>
 
             <div class="skill-detail-item">
-              <h3>Rust <span class="skill-level" span></h3>
+              <h3>Rust</h3>
               <p>Safe systems programming with focus on memory safety and performance. Basic to intermediate knowledge.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">Memory Safety</span>
@@ -647,7 +711,7 @@ html {
             </div>
 
             <div class="skill-detail-item">
-              <h3>Java <span class="skill-level" span></h3>
+              <h3>Java</h3>
               <p>Object-oriented programming and application development with Java.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">OOP</span>
@@ -657,7 +721,7 @@ html {
             </div>
 
             <div class="skill-detail-item">
-              <h3>Bash <span class="skill-level" span></h3>
+              <h3>Bash</h3>
               <p>Shell scripting for automation, system administration, and DevOps tasks.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">Shell Scripting</span>
@@ -673,7 +737,7 @@ html {
           <h2 class="skill-detail-title">🖥️ Operating Systems</h2>
           <div class="skill-detail-grid">
             <div class="skill-detail-item">
-              <h3>Debian <span class="skill-level" span></h3>
+              <h3>Debian</h3>
               <p>Server and desktop administration with Debian Linux. Extensive experience in configuration, maintenance, and optimization.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">System Administration</span>
@@ -684,7 +748,7 @@ html {
             </div>
 
             <div class="skill-detail-item">
-              <h3>L4Re (L4 Runtime Environment) <span class="skill-level" span></h3>
+              <h3>L4Re (L4 Runtime Environment)</h3>
               <p>Microkernel-based operating system for security-critical and real-time applications. Experience with L4Re framework and Fiasco.OC.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">Microkernel</span>
@@ -695,7 +759,7 @@ html {
             </div>
 
             <div class="skill-detail-item">
-              <h3>Ubuntu <span class="skill-level" span></h3>
+              <h3>Ubuntu</h3>
               <p>Development and deployment on Ubuntu systems. Experience with Ubuntu Server and Desktop.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">Ubuntu Server</span>
@@ -705,7 +769,7 @@ html {
             </div>
 
             <div class="skill-detail-item">
-              <h3>Windows <span class="skill-level" span></h3>
+              <h3>Windows</h3>
               <p>Development and administration of Windows systems. Experience with desktop and server environments.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">Windows Server</span>
@@ -721,7 +785,7 @@ html {
           <h2 class="skill-detail-title">🔌 Communication Protocols</h2>
           <div class="skill-detail-grid">
             <div class="skill-detail-item">
-              <h3>MQTT <span class="skill-level" span></h3>
+              <h3>MQTT</h3>
               <p>Lightweight messaging protocol for IoT and M2M communication. Extensive experience with Pub/Sub patterns and QoS.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">Pub/Sub</span>
@@ -732,7 +796,7 @@ html {
             </div>
 
             <div class="skill-detail-item">
-              <h3>Fast DDS (eProsima) <span class="skill-level" span></h3>
+              <h3>Fast DDS (eProsima)</h3>
               <p>High-performance DDS implementation for distributed real-time systems. Expert knowledge in Data Distribution Service (DDS) middleware.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">DDS</span>
@@ -744,7 +808,7 @@ html {
             </div>
 
             <div class="skill-detail-item">
-              <h3>Micro XRCE-DDS <span class="skill-level" span></h3>
+              <h3>Micro XRCE-DDS</h3>
               <p>Extremely resource-efficient DDS implementation for microcontrollers and embedded systems. Specialized in IoT and edge computing.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">Embedded Systems</span>
@@ -762,7 +826,7 @@ html {
           <h2 class="skill-detail-title">🗄️ Databases</h2>
           <div class="skill-detail-grid">
             <div class="skill-detail-item">
-              <h3>MariaDB <span class="skill-level" span></h3>
+              <h3>MariaDB</h3>
               <p>Relational open-source database as MySQL fork. Experience with installation, configuration, and optimization.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">SQL</span>
@@ -773,7 +837,7 @@ html {
             </div>
 
             <div class="skill-detail-item">
-              <h3>SQLite <span class="skill-level" span></h3>
+              <h3>SQLite</h3>
               <p>Lightweight embedded database for local data storage and mobile applications.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">Embedded Database</span>
@@ -790,7 +854,7 @@ html {
           <h2 class="skill-detail-title">🚀 Development Tools</h2>
           <div class="skill-detail-grid">
             <div class="skill-detail-item">
-              <h3>Flutter <span class="skill-level" span></h3>
+              <h3>Flutter</h3>
               <p>Cross-platform app development with Flutter and Dart. Experience with iOS and Android development.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">Dart</span>
@@ -801,7 +865,7 @@ html {
             </div>
 
             <div class="skill-detail-item">
-              <h3>Make <span class="skill-level" span></h3>
+              <h3>Make</h3>
               <p>Build automation with GNU Make and Makefiles. Experience in creating complex build systems.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">Makefiles</span>
@@ -812,7 +876,7 @@ html {
             </div>
 
             <div class="skill-detail-item">
-              <h3>Git <span class="skill-level" span></h3>
+              <h3>Git</h3>
               <p>Version control and collaboration with Git. Extensive experience with branching, merging, and Git workflows.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">Version Control</span>
@@ -829,7 +893,7 @@ html {
           <h2 class="skill-detail-title">☁️ Cloud & Containers</h2>
           <div class="skill-detail-grid">
             <div class="skill-detail-item">
-              <h3>Docker <span class="skill-level" span></h3>
+              <h3>Docker</h3>
               <p>Container technology for consistent development and production environments. Experience with Dockerfile, Docker Compose, and container orchestration.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">Containerization</span>
@@ -840,7 +904,7 @@ html {
             </div>
 
             <div class="skill-detail-item">
-              <h3>Containerlab <span class="skill-level" span></h3>
+              <h3>Containerlab</h3>
               <p>Framework for container-based network labs. Experience in creating and managing complex network topologies.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">Network Labs</span>
@@ -851,7 +915,7 @@ html {
             </div>
 
             <div class="skill-detail-item">
-              <h3>Microsoft Azure <span class="skill-level" span></h3>
+              <h3>Microsoft Azure</h3>
               <p>Cloud computing platform for deployment, scaling, and management of applications in Microsoft Cloud.</p>
               <div class="skill-detail-tags">
                 <span class="skill-detail-tag">Azure Services</span>
