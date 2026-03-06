@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,6 +31,89 @@ body {
   overflow-x: hidden;
 }
 
+/* ===== Navigation ===== */
+.navbar {
+  max-width: 1400px;
+  margin: 0 auto 30px;
+  background: var(--bg-card);
+  border-radius: 18px;
+  padding: 20px 30px;
+  box-shadow: 0 0 40px rgba(139,92,246,.4);
+  border: 1px solid rgba(139,92,246,.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  position: sticky;
+  top: 10px;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+}
+
+.navbar-brand {
+  font-size: 1.5em;
+  font-weight: bold;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.navbar-menu a {
+  color: var(--text-main);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all .3s;
+  position: relative;
+  cursor: pointer;
+}
+
+.navbar-menu a:hover {
+  background: rgba(139,92,246,.2);
+  color: var(--primary);
+}
+
+.navbar-menu a.active {
+  background: linear-gradient(135deg,var(--primary),var(--secondary));
+  color: white;
+}
+
+/* Mobile Menu Toggle */
+.menu-toggle {
+  display: none;
+  background: var(--primary);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+  
+  .navbar-menu {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  .navbar-menu.active {
+    display: flex;
+  }
+}
 
 /* ===== Layout ===== */
 .layout {
@@ -57,6 +140,7 @@ body {
   border-radius: 18px;
   box-shadow: 0 0 50px rgba(139,92,246,.45);
   border: 1px solid rgba(139,92,246,.3);
+  margin-bottom: 30px;
 }
 
 .profile-avatar {
@@ -82,15 +166,104 @@ body {
   display: flex;
   gap: 30px;
   margin-top: 20px;
+  flex-wrap: wrap;
 }
 
 .stat-number { font-size: 2em; color: var(--primary); }
 
+/* ===== About Me Section ===== */
+.about-section {
+  background: var(--bg-card);
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0 0 40px rgba(139,92,246,.4);
+  border: 1px solid rgba(139,92,246,.3);
+  margin-bottom: 30px;
+}
+
+.about-title {
+  font-size: 1.8em;
+  color: var(--primary);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.about-content {
+  color: var(--text-soft);
+  line-height: 1.8;
+  font-size: 1.05em;
+}
+
+.about-content p {
+  margin-bottom: 15px;
+}
+
+/* ===== Highlights Grid ===== */
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.highlight-card {
+  background: var(--bg-card);
+  padding: 25px;
+  border-radius: 14px;
+  border: 1px solid rgba(139,92,246,.3);
+  transition: all .3s;
+}
+
+.highlight-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(139,92,246,.5);
+  border-color: var(--primary);
+}
+
+.highlight-icon {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.highlight-title {
+  font-size: 1.2em;
+  color: var(--primary);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.highlight-description {
+  color: var(--text-soft);
+  line-height: 1.6;
+  font-size: 0.95em;
+}
+
 /* ===== Sections ===== */
+.section {
+  scroll-margin-top: 100px;
+  display: none;
+}
+
+.section.active {
+  display: block;
+}
+
 .section-title {
-  margin: 50px 0 20px;
+  margin: 50px 0 25px;
   font-size: 2em;
   text-align: center;
+}
+
+.content-card {
+  background: var(--bg-card);
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 0 40px rgba(139,92,246,.4);
+  border: 1px solid rgba(139,92,246,.3);
+  margin-bottom: 30px;
 }
 
 /* ===== Repos ===== */
@@ -130,6 +303,7 @@ body {
   gap: 14px;
   font-size: .9em;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .language-badge {
@@ -138,28 +312,175 @@ body {
   border: 1px solid currentColor;
 }
 
+/* ===== Skills Page ===== */
+.skills-page-container {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+@media (max-width: 900px) {
+  .skills-page-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.skills-sidebar {
+  background: var(--bg-card);
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid rgba(139,92,246,.3);
+  height: fit-content;
+  position: sticky;
+  top: 120px;
+}
+
+.skill-nav-item {
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .3s;
+  border-left: 3px solid transparent;
+  color: var(--text-soft);
+}
+
+.skill-nav-item:hover {
+  background: rgba(139,92,246,.1);
+  border-left-color: var(--primary);
+}
+
+.skill-nav-item.active {
+  background: rgba(139,92,246,.2);
+  border-left-color: var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.skills-content {
+  background: var(--bg-card);
+  padding: 40px;
+  border-radius: 14px;
+  border: 1px solid rgba(139,92,246,.3);
+}
+
+.skill-detail-section {
+  display: none;
+}
+
+.skill-detail-section.active {
+  display: block;
+}
+
+.skill-detail-title {
+  font-size: 2em;
+  color: var(--primary);
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.skill-detail-grid {
+  display: grid;
+  gap: 25px;
+}
+
+.skill-detail-item {
+  background: rgba(139,92,246,.08);
+  padding: 25px;
+  border-radius: 12px;
+  border-left: 4px solid var(--secondary);
+  transition: all .3s;
+}
+
+.skill-detail-item:hover {
+  background: rgba(139,92,246,.15);
+  transform: translateX(5px);
+}
+
+.skill-detail-item h3 {
+  color: var(--primary);
+  font-size: 1.4em;
+  margin-bottom: 12px;
+}
+
+.skill-detail-item p {
+  color: var(--text-soft);
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.skill-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.skill-detail-tag {
+  padding: 6px 14px;
+  background: rgba(139,92,246,.2);
+  border: 1px solid rgba(139,92,246,.4);
+  border-radius: 999px;
+  font-size: 0.85em;
+  color: var(--text-main);
+}
+
+.skill-level {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75em;
+  font-weight: 600;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.skill-level.expert {
+  background: rgba(74, 222, 128, 0.2);
+  color: #4ade80;
+  border: 1px solid #4ade80;
+}
+
+.skill-level.intermediate {
+  background: rgba(251, 191, 36, 0.2);
+  color: #fbbf24;
+  border: 1px solid #fbbf24;
+}
+
+.skill-level.basic {
+  background: rgba(139, 92, 246, 0.2);
+  color: #8b5cf6;
+  border: 1px solid #8b5cf6;
+}
+
 /* ===== Skeleton ===== */
 .skeleton {
   height: 180px;
   border-radius: 14px;
   background: linear-gradient(90deg,#222,#333,#222);
+  background-size: 200px 100%;
   animation: shimmer 1.5s infinite;
 }
 
 @keyframes shimmer {
-  0% { background-position: -200px; }
-  100% { background-position: 200px; }
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
 }
 
 /* ===== Side Panel ===== */
 .side-panel {
   position: sticky;
-  top: 20px;
+  top: 100px;
   background: var(--bg-card);
   padding: 25px;
   border-radius: 18px;
   box-shadow: 0 0 40px rgba(139,92,246,.4);
   border: 1px solid rgba(139,92,246,.3);
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
 }
 
 .side-section { margin-bottom: 25px; }
@@ -195,17 +516,356 @@ body {
   border: 1px solid rgba(255,255,255,.2);
   font-size: .85em;
 }
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
 </style>
 </head>
 
 <body>
+
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="navbar-brand">Portfolio</div>
+  <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+  <ul class="navbar-menu" id="navMenu">
+    <li><a href="#profile" class="active" onclick="switchSection('profile', event)">Profile</a></li>
+    <li><a href="#repos" onclick="switchSection('repos', event)">Repositories</a></li>
+    <li><a href="#skills" onclick="switchSection('skills', event)">Skills</a></li>
+  </ul>
+</nav>
+
 <div class="layout">
 
 <main>
-  <div id="profile"></div>
+  <!-- Profile Section -->
+  <section id="profile" class="section active">
+    <div id="profileContent"></div>
 
-  <h2 class="section-title">Repositories</h2>
-  <div id="repos" class="repos-grid"></div>
+    <!-- About Me Section -->
+    <div class="about-section">
+      <h2 class="about-title">👨‍💻 About Me</h2>
+      <div class="about-content">
+        <p>
+              I'm a <strong>dual study student</strong> from Germany, pursuing a degree in <strong>IT Security</strong>. 
+              My academic journey combines theoretical knowledge with practical experience, allowing me to work on 
+              real-world projects while deepening my understanding of cybersecurity, systems programming, and distributed systems.
+            </p>
+            <p>
+              On GitHub, you'll find a mix of <strong>university projects</strong> and <strong>personal initiatives</strong>. 
+              I believe in continuous learning and use my free time to explore new technologies, experiment with different 
+              programming paradigms, and contribute to open-source projects. Each project is an opportunity to grow as a developer 
+              and security professional.
+            </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Repositories Section -->
+  <section id="repos" class="section">
+    <h2 class="section-title">Repositories</h2>
+    <div id="reposContent" class="repos-grid"></div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="section">
+    <h2 class="section-title">Technical Skills/Experiences</h2>
+    
+    <div class="skills-page-container">
+      <!-- Skills Navigation Sidebar -->
+      <div class="skills-sidebar">
+        <div class="skill-nav-item active" onclick="showSkillDetail('languages')">
+          Programming Languages
+        </div>
+        <div class="skill-nav-item" onclick="showSkillDetail('systems')">
+          Operating Systems
+        </div>
+        <div class="skill-nav-item" onclick="showSkillDetail('protocols')">
+          Communication Protocols
+        </div>
+        <div class="skill-nav-item" onclick="showSkillDetail('databases')">
+          Databases
+        </div>
+        <div class="skill-nav-item" onclick="showSkillDetail('devtools')">
+          Development Tools
+        </div>
+        <div class="skill-nav-item" onclick="showSkillDetail('cloud')">
+          Cloud & Containers
+        </div>
+      </div>
+
+      <!-- Skills Content Area -->
+      <div class="skills-content">
+        
+        <!-- Programming Languages Detail -->
+        <div id="skill-languages" class="skill-detail-section active">
+          <h2 class="skill-detail-title">💻 Programming Languages</h2>
+          <div class="skill-detail-grid">
+            
+            <div class="skill-detail-item">
+              <h3>C <span class="skill-level" span></h3>
+              <p>Systems programming and low-level development. Extensive experience in developing efficient and high-performance applications.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">System Programming</span>
+                <span class="skill-detail-tag">Memory Management</span>
+                <span class="skill-detail-tag">Embedded</span>
+              </div>
+            </div>
+            
+            <div class="skill-detail-item">
+              <!-- <h3>Python <span class="skill-level intermediate">Intermediate</span></h3> -->
+              <h3>Python <span class="skill-level" span></h3> 
+              <p>Scripting, automation, and backend development with Python. Experience in building tools and automation scripts.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">Python 3.x</span>
+                <span class="skill-detail-tag">Scripting</span>
+                <span class="skill-detail-tag">Automation</span>
+              </div>
+            </div>
+
+            <div class="skill-detail-item">
+              <h3>C++ <span class="skill-level" span></h3>
+              <p>Object-oriented and modern C++ development. Experience with templates, STL, and modern C++ standards.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">OOP</span>
+                <span class="skill-detail-tag">STL</span>
+                <span class="skill-detail-tag">Modern C++</span>
+                <span class="skill-detail-tag">Templates</span>
+              </div>
+            </div>
+
+            <div class="skill-detail-item">
+              <h3>Rust <span class="skill-level" span></h3>
+              <p>Safe systems programming with focus on memory safety and performance. Basic to intermediate knowledge.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">Memory Safety</span>
+                <span class="skill-detail-tag">Cargo</span>
+                <span class="skill-detail-tag">Ownership</span>
+              </div>
+            </div>
+
+            <div class="skill-detail-item">
+              <h3>Java <span class="skill-level" span></h3>
+              <p>Object-oriented programming and application development with Java.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">OOP</span>
+                <span class="skill-detail-tag">JVM</span>
+                <span class="skill-detail-tag">Maven</span>
+              </div>
+            </div>
+
+            <div class="skill-detail-item">
+              <h3>Bash <span class="skill-level" span></h3>
+              <p>Shell scripting for automation, system administration, and DevOps tasks.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">Shell Scripting</span>
+                <span class="skill-detail-tag">Automation</span>
+                <span class="skill-detail-tag">Linux</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Operating Systems Detail -->
+        <div id="skill-systems" class="skill-detail-section">
+          <h2 class="skill-detail-title">🖥️ Operating Systems</h2>
+          <div class="skill-detail-grid">
+            <div class="skill-detail-item">
+              <h3>Debian <span class="skill-level" span></h3>
+              <p>Server and desktop administration with Debian Linux. Extensive experience in configuration, maintenance, and optimization.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">System Administration</span>
+                <span class="skill-detail-tag">Package Management</span>
+                <span class="skill-detail-tag">APT</span>
+                <span class="skill-detail-tag">Systemd</span>
+              </div>
+            </div>
+
+            <div class="skill-detail-item">
+              <h3>L4Re (L4 Runtime Environment) <span class="skill-level" span></h3>
+              <p>Microkernel-based operating system for security-critical and real-time applications. Experience with L4Re framework and Fiasco.OC.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">Microkernel</span>
+                <span class="skill-detail-tag">Real-time OS</span>
+                <span class="skill-detail-tag">Fiasco.OC</span>
+                <span class="skill-detail-tag">Security</span>
+              </div>
+            </div>
+
+            <div class="skill-detail-item">
+              <h3>Ubuntu <span class="skill-level" span></h3>
+              <p>Development and deployment on Ubuntu systems. Experience with Ubuntu Server and Desktop.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">Ubuntu Server</span>
+                <span class="skill-detail-tag">Cloud Images</span>
+                <span class="skill-detail-tag">LTS Versions</span>
+              </div>
+            </div>
+
+            <div class="skill-detail-item">
+              <h3>Windows <span class="skill-level" span></h3>
+              <p>Development and administration of Windows systems. Experience with desktop and server environments.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">Windows Server</span>
+                <span class="skill-detail-tag">PowerShell</span>
+                <span class="skill-detail-tag">Administration</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Protocols Detail -->
+        <div id="skill-protocols" class="skill-detail-section">
+          <h2 class="skill-detail-title">🔌 Communication Protocols</h2>
+          <div class="skill-detail-grid">
+            <div class="skill-detail-item">
+              <h3>MQTT <span class="skill-level" span></h3>
+              <p>Lightweight messaging protocol for IoT and M2M communication. Extensive experience with Pub/Sub patterns and QoS.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">Pub/Sub</span>
+                <span class="skill-detail-tag">QoS Levels</span>
+                <span class="skill-detail-tag">Broker</span>
+                <span class="skill-detail-tag">IoT</span>
+              </div>
+            </div>
+
+            <div class="skill-detail-item">
+              <h3>Fast DDS (eProsima) <span class="skill-level" span></h3>
+              <p>High-performance DDS implementation for distributed real-time systems. Expert knowledge in Data Distribution Service (DDS) middleware.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">DDS</span>
+                <span class="skill-detail-tag">Real-time</span>
+                <span class="skill-detail-tag">Publish-Subscribe</span>
+                <span class="skill-detail-tag">QoS Policies</span>
+                <span class="skill-detail-tag">IDL</span>
+              </div>
+            </div>
+
+            <div class="skill-detail-item">
+              <h3>Micro XRCE-DDS <span class="skill-level" span></h3>
+              <p>Extremely resource-efficient DDS implementation for microcontrollers and embedded systems. Specialized in IoT and edge computing.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">Embedded Systems</span>
+                <span class="skill-detail-tag">XRCE Protocol</span>
+                <span class="skill-detail-tag">Resource-constrained</span>
+                <span class="skill-detail-tag">Agent-Client</span>
+                <span class="skill-detail-tag">Microcontrollers</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Databases Detail -->
+        <div id="skill-databases" class="skill-detail-section">
+          <h2 class="skill-detail-title">🗄️ Databases</h2>
+          <div class="skill-detail-grid">
+            <div class="skill-detail-item">
+              <h3>MariaDB <span class="skill-level" span></h3>
+              <p>Relational open-source database as MySQL fork. Experience with installation, configuration, and optimization.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">SQL</span>
+                <span class="skill-detail-tag">Replication</span>
+                <span class="skill-detail-tag">InnoDB</span>
+                <span class="skill-detail-tag">Performance Tuning</span>
+              </div>
+            </div>
+
+            <div class="skill-detail-item">
+              <h3>SQLite <span class="skill-level" span></h3>
+              <p>Lightweight embedded database for local data storage and mobile applications.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">Embedded Database</span>
+                <span class="skill-detail-tag">Serverless</span>
+                <span class="skill-detail-tag">File-based</span>
+                <span class="skill-detail-tag">Zero-Config</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Development Tools Detail -->
+        <div id="skill-devtools" class="skill-detail-section">
+          <h2 class="skill-detail-title">🚀 Development Tools</h2>
+          <div class="skill-detail-grid">
+            <div class="skill-detail-item">
+              <h3>Flutter <span class="skill-level" span></h3>
+              <p>Cross-platform app development with Flutter and Dart. Experience with iOS and Android development.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">Dart</span>
+                <span class="skill-detail-tag">Cross-Platform</span>
+                <span class="skill-detail-tag">Mobile Development</span>
+                <span class="skill-detail-tag">Widgets</span>
+              </div>
+            </div>
+
+            <div class="skill-detail-item">
+              <h3>Make <span class="skill-level" span></h3>
+              <p>Build automation with GNU Make and Makefiles. Experience in creating complex build systems.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">Makefiles</span>
+                <span class="skill-detail-tag">Build Automation</span>
+                <span class="skill-detail-tag">GNU Make</span>
+                <span class="skill-detail-tag">Dependencies</span>
+              </div>
+            </div>
+
+            <div class="skill-detail-item">
+              <h3>Git <span class="skill-level" span></h3>
+              <p>Version control and collaboration with Git. Extensive experience with branching, merging, and Git workflows.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">Version Control</span>
+                <span class="skill-detail-tag">Branching</span>
+                <span class="skill-detail-tag">Git Flow</span>
+                <span class="skill-detail-tag">Collaboration</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cloud & Container Detail -->
+        <div id="skill-cloud" class="skill-detail-section">
+          <h2 class="skill-detail-title">☁️ Cloud & Containers</h2>
+          <div class="skill-detail-grid">
+            <div class="skill-detail-item">
+              <h3>Docker <span class="skill-level" span></h3>
+              <p>Container technology for consistent development and production environments. Experience with Dockerfile, Docker Compose, and container orchestration.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">Containerization</span>
+                <span class="skill-detail-tag">Docker Compose</span>
+                <span class="skill-detail-tag">Dockerfile</span>
+                <span class="skill-detail-tag">Multi-stage Builds</span>
+              </div>
+            </div>
+
+            <div class="skill-detail-item">
+              <h3>Containerlab <span class="skill-level" span></h3>
+              <p>Framework for container-based network labs. Experience in creating and managing complex network topologies.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">Network Labs</span>
+                <span class="skill-detail-tag">Topology Definition</span>
+                <span class="skill-detail-tag">Network Emulation</span>
+                <span class="skill-detail-tag">Testing</span>
+              </div>
+            </div>
+
+            <div class="skill-detail-item">
+              <h3>Microsoft Azure <span class="skill-level" span></h3>
+              <p>Cloud computing platform for deployment, scaling, and management of applications in Microsoft Cloud.</p>
+              <div class="skill-detail-tags">
+                <span class="skill-detail-tag">Azure Services</span>
+                <span class="skill-detail-tag">Cloud Deployment</span>
+                <span class="skill-detail-tag">Virtual Machines</span>
+                <span class="skill-detail-tag">Azure DevOps</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
 </main>
 
 <aside class="side-panel">
@@ -217,19 +877,18 @@ body {
 
   <div class="side-section">
     <div class="side-title">👤 Quick Facts</div>
-    <!-- <p>💻 Web & API Developer</p> -->
+    <p>💻 Systems & Embedded Developer</p>
     <p>🌍 Germany</p>
     <p>🚀 Open for Projects</p>
   </div>
 
   <div class="side-section">
-    <div class="side-title">🛠 Tech Stack</div>
+    <div class="side-title">🎯 Focus Areas</div>
     <div class="tech-list">
-      <!-- <span>JavaScript</span>
-      <span>HTML</span>
-      <span>CSS</span>
-      <span>Node.js</span>
-      <span>GitHub API</span> -->
+      <span>System Programming</span>
+      <span>Real-time Systems</span>
+      <span>DDS Middleware</span>
+      <span>Embedded Systems</span>
     </div>
   </div>
 
@@ -246,6 +905,49 @@ const username = "Trigger-45";
 const cacheKey = "github_cache";
 const cacheTTL = 10 * 60 * 1000;
 
+// Navigation Menu Toggle
+function toggleMenu() {
+  const menu = document.getElementById('navMenu');
+  menu.classList.toggle('active');
+}
+
+// Switch between main sections
+function switchSection(sectionId, event) {
+  if (event) event.preventDefault();
+  
+  // Update nav links
+  const links = document.querySelectorAll('.navbar-menu a');
+  links.forEach(link => link.classList.remove('active'));
+  if (event) event.target.classList.add('active');
+  
+  // Update sections
+  const sections = document.querySelectorAll('.section');
+  sections.forEach(section => section.classList.remove('active'));
+  document.getElementById(sectionId).classList.add('active');
+  
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  
+  // Close mobile menu
+  if (window.innerWidth <= 768) {
+    document.getElementById('navMenu').classList.remove('active');
+  }
+}
+
+// Show skill detail section
+function showSkillDetail(skillId) {
+  // Update sidebar nav
+  const navItems = document.querySelectorAll('.skill-nav-item');
+  navItems.forEach(item => item.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  // Update content
+  const detailSections = document.querySelectorAll('.skill-detail-section');
+  detailSections.forEach(section => section.classList.remove('active'));
+  document.getElementById('skill-' + skillId).classList.add('active');
+}
+
+// GitHub API Functions
 function getCache() {
   const c = localStorage.getItem(cacheKey);
   if (!c) return null;
@@ -276,16 +978,16 @@ async function fetchGitHub() {
 }
 
 function renderProfile(p) {
-  document.getElementById("profile").innerHTML = `
+  document.getElementById("profileContent").innerHTML = `
   <div class="profile-header">
-    <img class="profile-avatar" src="${p.avatar_url}" alt="GitHub Avatar von ${p.login}">
+    <img class="profile-avatar" src="${p.avatar_url}" alt="GitHub Avatar of ${p.login}">
     <div class="profile-info">
       <h1 class="profile-name">${p.name || p.login}</h1>
       <div class="profile-username">@${p.login}</div>
-      <p class="profile-bio">${p.bio || ""}</p>
+      <p class="profile-bio">${p.bio || "Systems & Embedded Developer | Real-time Communication Specialist"}</p>
       <div class="profile-stats">
         <div><div class="stat-number">${p.public_repos}</div>Repos</div>
-        <div><div class="stat-number">${p.followers}</div>Follower</div>
+        <div><div class="stat-number">${p.followers}</div>Followers</div>
         <div><div class="stat-number">${p.following}</div>Following</div>
       </div>
     </div>
@@ -296,23 +998,24 @@ function repoCard(r) {
   return `
   <a href="${r.html_url}" target="_blank" class="repo-card">
     <div class="repo-name">${r.name}</div>
-    <div class="repo-description">${r.description || "Keine Beschreibung vorhanden"}</div>
+    <div class="repo-description">${r.description || "No description available"}</div>
     <div class="repo-stats">
       ${r.language ? `<span class="language-badge">${r.language}</span>` : ""}
       ⭐ ${r.stargazers_count}
-      🕒 ${new Date(r.updated_at).toLocaleDateString()}
+      🕒 ${new Date(r.updated_at).toLocaleDateString('en-US')}
     </div>
   </a>`;
 }
 
 function renderRepos(repos) {
-  document.getElementById("repos").innerHTML = repos.map(repoCard).join("");
+  document.getElementById("reposContent").innerHTML = repos.map(repoCard).join("");
 }
 
-/* Skeleton Loader */
-document.getElementById("repos").innerHTML =
-Array(6).fill('<div class="skeleton"></div>').join("");
+// Initialize - Skeleton Loader
+document.getElementById("reposContent").innerHTML =
+  Array(6).fill('<div class="skeleton"></div>').join("");
 
+// Fetch and Render Data
 fetchGitHub().then(data => {
   renderProfile(data.profile);
   renderRepos(data.repos);
