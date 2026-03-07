@@ -281,6 +281,8 @@ body {
   color: inherit;
   transition: transform .3s, box-shadow .3s;
   border: 1px solid rgba(139,92,246,.3);
+  position: relative;
+  overflow: hidden;
 }
 
 .repo-card:hover {
@@ -310,6 +312,73 @@ body {
   padding: 4px 10px;
   border-radius: 999px;
   border: 1px solid currentColor;
+}
+
+/* ===== Repository Badges ===== */
+.repo-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.7em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.repo-badge::before {
+  content: '●';
+  font-size: 1.2em;
+}
+
+.repo-badge.active {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+  animation: pulse-badge 2s infinite;
+}
+
+.repo-badge.active::before {
+  animation: blink 2s infinite;
+}
+
+.repo-badge.featured {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+.repo-badge.experimental {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+
+.repo-badge.maintenance {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.repo-badge.archived {
+  background: linear-gradient(135deg, #6b7280, #4b5563);
+  box-shadow: 0 2px 8px rgba(107, 114, 128, 0.3);
+}
+
+@keyframes pulse-badge {
+  0%, 100% {
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.6);
+  }
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0.3; }
 }
 
 /* ===== Skills Page ===== */
@@ -1058,9 +1127,77 @@ function renderProfile(p) {
   </div>`;
 }
 
+function getRepoBadge(r) {
+  // Definiere hier, welche Repos welche Badges bekommen sollen
+  
+  // Check archived status FIRST
+  if (r.archived) {
+    return { text: 'Archived', class: 'archived' };
+  }
+  
+  // Option 2: Badge basierend auf Topics (HIGHEST PRIORITY after archived)
+  if (r.topics && r.topics.length > 0) {
+    if (r.topics.includes('active-development')) {
+      return { text: 'Active', class: 'active' };
+    }
+    if (r.topics.includes('featured')) {
+      return { text: 'Featured', class: 'featured' };
+    }
+    if (r.topics.includes('experimental')) {
+      return { text: 'Experimental', class: 'experimental' };
+    }
+    if (r.topics.includes('maintenance')) {
+      return { text: 'Maintenance', class: 'maintenance' };
+    }
+  }
+  
+  // Option 1: Manuelle Liste von aktiven Repositories
+  const activeRepos = [
+    // 'repo-name-1',  // Ersetze diese Namen mit deinen tatsächlichen Repo-Namen
+    // 'repo-name-2',
+  ];
+  
+  const featuredRepos = [
+    // 'featured-repo-1'
+  ];
+  
+  const experimentalRepos = [
+    // 'experimental-repo-1'
+  ];
+  
+  // Check if in active list
+  if (activeRepos.includes(r.name)) {
+    return { text: 'Active', class: 'active' };
+  }
+  
+  // Check if in featured list
+  if (featuredRepos.includes(r.name)) {
+    return { text: 'Featured', class: 'featured' };
+  }
+  
+  // Check if in experimental list
+  if (experimentalRepos.includes(r.name)) {
+    return { text: 'Experimental', class: 'experimental' };
+  }
+  
+  // Option 3: Badge basierend auf letztem Update (LOWEST PRIORITY)
+  /*
+  const daysSinceUpdate = (Date.now() - new Date(r.updated_at)) / (1000 * 60 * 60 * 24);
+  if (daysSinceUpdate < 7) {
+    return { text: 'Recent', class: 'active' };
+  }
+  */
+  
+  return null;
+}
+
 function repoCard(r) {
+  const badge = getRepoBadge(r);
+  const badgeHTML = badge ? `<div class="repo-badge ${badge.class}">${badge.text}</div>` : '';
+  
   return `
   <a href="${r.html_url}" target="_blank" class="repo-card">
+    ${badgeHTML}
     <div class="repo-name">${r.name}</div>
     <div class="repo-description">${r.description || "No description available"}</div>
     <div class="repo-stats">
